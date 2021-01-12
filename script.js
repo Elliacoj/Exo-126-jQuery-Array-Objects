@@ -6,7 +6,7 @@ let arrObj = [
 ];
 
 //Methode js native pour parcourir un tableau d'objets ( avec for...in )
-for(let i in arrObj) {
+/*for(let i in arrObj) {
     // i est l'index de mon tableau d'objet
     console.log("index = " + i);
 
@@ -27,5 +27,59 @@ arrObj.forEach(function(arr) {
 $.each(arrObj, function(index, value) {
     //Afficher la propriété age pour chaque objet contenu dans mon tableau
    console.log("Affichage age utilisant jQuery = " + value.age);
-});
+});*/
+let page = $("p");
+
+if(page[0].classList.contains("page1")) {
+    $("body").append('<div id="avatar"></div>').append('<div id="name"></div>').append('<button id="left"><</button>').append('<button id="right">></button>');
+
+    perso(0);
+
+    function perso(x) {
+        $('#avatar').width("40%").height("500px").css({
+            "background-image": "url(" + arrObj[x].avatar + ")",
+            "background-size": "cover",
+            "margin": "auto"
+        });
+
+        $('#name').text(arrObj[x].person + "(" + arrObj[x].age + ")").addClass(x).css({
+            "margin": "2% 0 2% 0",
+            "width": "100%",
+            "text-align": "center"
+        });
+
+        $('#left').css("margin-left", "47.5%").click(function () {
+            if(x !== 0) {
+                perso(x - 1);
+            }
+        });
+
+        $('#right').click(function () {
+            if(x !== (arrObj.length - 1)) {
+                perso(x + 1);
+            }
+        });
+    }
+}
+
+if(page[0].classList.contains("page2")) {
+    let div = $('div');
+
+    for(let x = 0; x < arrObj.length; x++) {
+        $("body").append('<div class="'+ x +'"></div>').append('<p id="'+ x +'"></p>');
+
+        $("."+ x +"").width("10%").height("150px").css({
+            "background-image": "url(" + arrObj[x].avatar + ")",
+            "background-size": "cover",
+            "margin": "auto"
+        });
+
+        $("#"+ x +"").text(arrObj[x].person + "(" + arrObj[x].age + ")").addClass(x).css({
+            "margin": "2% 0 2% 0",
+            "width": "100%",
+            "text-align": "center"
+        });
+    }
+}
+
 
